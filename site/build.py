@@ -27,12 +27,12 @@ OUT = ROOT / "_site"
 
 # (file in notebooks/, title, description)
 NOTEBOOKS = [
-    ("00_cv_demo.py", "OpenCV basics",
-     "Colour spaces, blur, threshold and colour segmentation."),
-    ("00_pid_demo.py", "PID control",
-     "Robot model, control loop, interactive P / PD / PID and visual servoing."),
     ("s1_follow_line.py", "Session 1: Follow Line",
      "Guided Follow Line: from the camera image to a P controller, plus a small 2D simulator for exploring speed vs. stability."),
+    # ("00_cv_demo.py", "OpenCV basics",
+    #  "Colour spaces, blur, threshold and colour segmentation."),
+    # ("00_pid_demo.py", "PID control",
+    #  "Robot model, control loop, interactive P / PD / PID and visual servoing."),
 ]
 
 # Notebooks with a slides layout are exported twice: as slides (<name>.html)
