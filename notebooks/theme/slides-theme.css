@@ -30,6 +30,10 @@
   --logo-top: 20;
   --logo-right: 32;
 
+  /* 4. Vertical space between cells shown on the same slide (e.g. cells
+        added with the "fragment" slide type). */
+  --cell-gap: 32px;
+
   /* Colours: accent for the rules, the rest follows marimo's light/dark mode */
   --theme-accent: #073349;
 }
@@ -107,6 +111,13 @@
    heading), which otherwise adds a second gap on top of the padding. */
 .reveal.mo-slides-theme .mo-slide-content .markdown > :first-child {
   margin-top: 0;
+}
+
+/* Space between cells on the same slide. marimo puts each cell (fragments are
+   wrapped in a .fragment div) as a direct child of .mo-slide-content, with no
+   gap between them by default. */
+.reveal.mo-slides-theme .mo-slide-content > * + * {
+  margin-top: var(--cell-gap);
 }
 
 /* A little typographic polish for slide text */

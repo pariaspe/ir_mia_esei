@@ -189,12 +189,12 @@ def _():
 
     | Time | Block | You end up with |
     |---|---|---|
-    | 0:00 – 0:15 | Tour of Unibotics | The Follow Line exercise open and the simulator running |
-    | 0:15 – 0:20 | **Step 1**: move the robot | A car that drives forward... and crashes |
-    | 0:20 – 0:45 | **Step 2**: see the line | A mask of the red line and its centre in the image |
-    | 0:45 – 1:10 | **Step 3**: close the loop (P controller) | **A first complete lap** |
-    | 1:10 – 1:20 | **Step 4**: speed vs. stability | An intuition of what limits your lap time |
-    | 1:20 – 1:30 | Homework and wrap-up | A plan to make your car faster |
+    | 0:00 - 0:15 | Tour of Unibotics | The Follow Line exercise open and the simulator running |
+    | 0:15 - 0:20 | **Step 1**: move the robot | A car that drives forward... and crashes |
+    | 0:20 - 0:45 | **Step 2**: see the line | A mask of the red line and its centre in the image |
+    | 0:45 - 1:10 | **Step 3**: close the loop (P controller) | **A first complete lap** |
+    | 1:10 - 1:20 | **Step 4**: speed vs. stability | An intuition of what limits your lap time |
+    | 1:20 - 1:30 | Homework and wrap-up | A plan to make your car faster |
 
     /// admonition | Different backgrounds, same goal
     You **don't need** to know control theory or be an expert programmer.
@@ -236,7 +236,7 @@ def _():
         [
             mo.image(src=str(ASSETS / "robot_model.png"),
                      style={"display": "block", "margin": "0 auto"},
-                    height=450),
+                     height=450),
             mo.md("Actuators: linear speed **V** and angular speed **W**").center(),
         ],
         align="center",
@@ -245,7 +245,7 @@ def _():
         [
             mo.image(src=str(ASSETS / "follow_line_camera.png"),
                      style={"display": "block", "margin": "0 auto"},
-                    height=450),
+                     height=450),
             mo.md("Sensor: front RGB camera").center(),
         ],
         align="center",
@@ -274,7 +274,7 @@ def _():
 
 @app.cell
 def _():
-    mo.image(src=str(ASSETS / "control_arch.png"),width=900).center()
+    mo.image(src=str(ASSETS / "control_arch.png"), width=900).center()
     return
 
 
@@ -465,7 +465,7 @@ def _(img_bgr, img_h, img_w, lower_red, roi_center, roi_height, upper_red):
 def _(line_cx, roi_bottom, roi_top):
     mo.md(
         f"""
-    Cyan box: ROI (rows {roi_top}–{roi_bottom}). Blue: image centre. Green dot: centroid
+    Cyan box: ROI (rows {roi_top}-{roi_bottom}). Blue: image centre. Green dot: centroid
     of the line, **cx = {line_cx:.1f} px**.
     """
         if line_cx is not None
@@ -591,7 +591,7 @@ def _(img_w, kp_img_slider, line_cx):
 @app.cell(hide_code=True)
 def _():
     mo.md(r"""
-    For the frame above (from steps 2.1–2.2), these are the error and the command
+    For the frame above (from steps 2.1-2.2), these are the error and the command
     the car would send. Move the ROI in 2.2 and see how the error changes.
     """)
     return
@@ -677,6 +677,7 @@ def _():
             mo.vstack([mo.md("**Homework preview**"), sim_kd, sim_kv]),
         ],
         justify="space-around",
+        gap=0
     )
     return sim_kd, sim_kp, sim_kv, sim_look, sim_v
 
@@ -718,7 +719,7 @@ def _():
     3. **Speed limit.** Keep only `V` and `Kp`. What is the **fastest lap**
        you can get? What stops you from going faster?
     4. **Looking ahead.** At the speed from experiment 3, try a very short
-       lookahead (0.5–1 m), then a very long one (8 m). Which one fails, and why?
+       lookahead (0.5-1 m), then a very long one (8 m). Which one fails, and why?
        In the top view, does the long one follow the line in curves, or cut the corners?
     5. 🚀 **Homework preview.** Turn on `Kv`: the car slows down when the error
        is large (in curves) and speeds up on straights. How much does your lap
