@@ -199,7 +199,7 @@ def _():
     /// admonition | Different backgrounds, same goal
     You **don't need** to know control theory or be an expert programmer.
     Every step comes with the full solution (hidden until you click on it).
-    Try first, then peek. If you already programme comfortably, look for the
+    Try first, then peek. If you code comfortably, look for the
     🚀 boxes: they contain extra challenges.
     ///
     """)
@@ -399,10 +399,26 @@ def _():
 
 @app.cell
 def _():
+    # Displayed in the cell below. Clicking it re-runs that cell, which
+    # recreates the sliders with their initial values.
+    reset_hsv = mo.ui.button(label="↺ Reset values")
+    return (reset_hsv,)
+
+
+@app.cell
+def _(reset_hsv):
+    reset_hsv  # dependency: re-create the sliders when the button is clicked
     hue_range = mo.ui.range_slider(start=0, stop=179, value=[0, 10], label="Hue")
     sat_range = mo.ui.range_slider(start=0, stop=255, value=[120, 255], label="Saturation")
     val_range = mo.ui.range_slider(start=0, stop=255, value=[70, 255], label="Value")
-    mo.vstack([hue_range, sat_range, val_range]).center()
+    mo.hstack(
+        [
+            mo.vstack([hue_range, sat_range, val_range], align="center"),
+            reset_hsv
+        ],
+        justify="space-around",
+        align="center",
+    )
     return hue_range, sat_range, val_range
 
 
@@ -720,7 +736,7 @@ def _(sim_kd, sim_kp, sim_kv, sim_look, sim_v):
             mo.md(f"🐢 Too slow: only {sim_progress:.0%} of the lap in {SIM_T_MAX:.0f} s"),
             kind="warn",
         )
-    mo.vstack([_banner, plot_simulation(sim_log, sim_status)])
+    mo.vstack([_banner, plot_simulation(sim_log, sim_status)], gap=0)
     return
 
 
