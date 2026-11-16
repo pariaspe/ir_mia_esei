@@ -21,10 +21,30 @@ app = marimo.App(
 with app.setup:
     import marimo as mo
 
-    ASSETS = mo.notebook_dir() / "assets"
+    # notebook_location() is the notebook folder locally and its URL in the browser (WASM)
+    ASSETS = mo.notebook_location() / "public"
     import numpy as np
     import matplotlib.pyplot as plt
     import cv2
+
+    def read_bytes(path) -> bytes:
+        """Read a file from disk, or download it when running in the browser (WASM)."""
+        import sys
+        if "pyodide" not in sys.modules:
+            from pathlib import Path
+            return Path(path).read_bytes()
+        from js import Uint8Array, XMLHttpRequest
+        req = XMLHttpRequest.new()
+        req.open("GET", str(path), False)  # synchronous: fine inside the Pyodide web worker
+        req.responseType = "arraybuffer"
+        req.send(None)
+        if req.status != 200:
+            raise FileNotFoundError(f"{path} (HTTP {req.status})")
+        return Uint8Array.new(req.response).to_bytes()
+
+    def load_image(path):
+        """Like cv2.imread (BGR image), but also works in the browser."""
+        return cv2.imdecode(np.frombuffer(read_bytes(path), np.uint8), cv2.IMREAD_COLOR)
 
     # ------------------------------------------------------------------
     # Toy simulator parameters (a 2D stand-in for the Unibotics F1 car).
@@ -381,7 +401,7 @@ def _():
 
 @app.cell
 def _():
-    img_bgr = cv2.imread(str(ASSETS / "follow_line_camera.png"))
+    img_bgr = load_image(ASSETS / "follow_line_camera.png")
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
     img_h, img_w = img_bgr.shape[:2]
     return img_bgr, img_h, img_rgb, img_w
@@ -649,7 +669,7 @@ def _():
 @app.cell(hide_code=True)
 def _():
     # Single source of truth: the same file students paste into Unibotics.
-    _code = (mo.notebook_dir().parent / "unibotics" / "follow_line_basic.py").read_text()
+    _code = read_bytes(mo.notebook_location().parent / "unibotics" / "follow_line_basic.py").decode()
     mo.accordion(
         {
             "💡 Solution: a complete, simple Follow Line": mo.vstack(

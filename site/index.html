@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intelligent Robotics I</title>
+  <style>
+    :root {
+      --accent: #073349;
+      --text: #1d2327;
+      --muted: #5b6770;
+      --bg: #ffffff;
+      --card: #f4f7f9;
+      --border: #dde4e9;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --accent: #5aa9f0;
+        --text: #e6eaed;
+        --muted: #9aa6ae;
+        --bg: #111518;
+        --card: #1a2025;
+        --border: #2a333a;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main { max-width: 760px; margin: 0 auto; padding: 48px 16px 64px; }
+    h1 { color: var(--accent); font-size: 2rem; line-height: 1.2; margin: 0 0 4px; }
+    h2 { color: var(--accent); font-size: 1.25rem; margin: 40px 0 12px; }
+    .subtitle { color: var(--muted); margin: 0; }
+    a { color: var(--accent); }
+    table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+    th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    ul.notebooks { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    ul.notebooks li { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; }
+    ul.notebooks a { font-weight: 600; text-decoration: none; }
+    ul.notebooks a:hover { text-decoration: underline; }
+    ul.notebooks .views { margin-left: 10px; font-size: 0.9rem; color: var(--muted); }
+    ul.notebooks .views a { font-weight: 400; }
+    ul.notebooks p { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
+    .note { color: var(--muted); font-size: 0.9rem; }
+    footer { color: var(--muted); font-size: 0.85rem; margin-top: 56px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Intelligent Robotics I</h1>
+  <p class="subtitle">Practice sessions · Master's in Artificial Intelligence (UDC · USC · UVigo) · 2026/27</p>
+
+  <h2>About the course</h2>
+  <p>
+    The practice part of the course is 10 hours over four sessions on
+    <a href="https://unibotics.org">Unibotics</a>, which runs
+    <a href="https://jderobot.github.io/RoboticsAcademy/">JdeRobot RoboticsAcademy</a>
+    (Gazebo + ROS 2, with Python written in the browser).
+    Session 1 starts with a purely reactive problem, Follow Line.
+    In sessions 2-4, pairs design and build a hybrid or deliberative architecture for a more complex exercise.
+  </p>
+  <table>
+    <tr><th>Session</th><th>Date</th><th>Content</th></tr>
+    <tr><td>S1</td><td>26/11</td><td>Introduction to the platform: a reactive Follow Line (individual)</td></tr>
+    <tr><td>S2</td><td>03/12</td><td>Choose an exercise and design a hybrid or deliberative architecture (pairs)</td></tr>
+    <tr><td>S3</td><td>10/12</td><td>Implementation (pairs)</td></tr>
+    <tr><td>S4</td><td>17/12</td><td>Implementation and demos (pairs)</td></tr>
+  </table>
+
+  <h2>Notebooks</h2>
+  <ul class="notebooks">
+<!-- NOTEBOOKS -->
+  </ul>
+  <p class="note">
+    The notebooks run entirely in your browser, so the first load takes a little while.
+  </p>
+
+  <h2>About me</h2>
+  <!-- TODO: write a short bio and add your links (web page, email, Google Scholar…). -->
+  <p>
+    Pedro Arias (Universidade de Vigo) ... TODO
+    <a href="https://github.com/pariaspe">GitHub</a>
+  </p>
+
+  <footer>Universidade de Vigo · Intelligent Robotics I</footer>
+</main>
+</body>
+</html>

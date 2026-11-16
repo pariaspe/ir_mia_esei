@@ -6,3 +6,8 @@ numpy
 matplotlib
 opencv-python
 pillow
+
+# Building the website (site/build.py: `marimo export html-wasm --offline`).
+# Playwright also needs its browser: python -m playwright install chromium
+uv
+playwright

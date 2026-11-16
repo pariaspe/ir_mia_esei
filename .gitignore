@@ -11,3 +11,6 @@ __marimo__/
 
 # Virtual environment
 .venv/
+
+# Pages
+_site/
