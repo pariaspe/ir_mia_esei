@@ -16,6 +16,8 @@ app = marimo.App(width="medium")
 
 with app.setup:
     import marimo as mo
+
+    ASSETS = mo.notebook_dir() / "assets"
     import numpy as np
     import matplotlib.pyplot as plt
     import cv2
@@ -227,14 +229,14 @@ def _():
 def _():
     image1 = mo.vstack(
         [
-            mo.image(src="robot_model.png", style={"display": "block", "margin": "0 auto"}),
+            mo.image(src=str(ASSETS / "robot_model.png"), style={"display": "block", "margin": "0 auto"}),
             mo.md("Actuators: linear speed **V** and angular speed **W**").center(),
         ],
         align="center",
     )
     image2 = mo.vstack(
         [
-            mo.image(src="image.png", style={"display": "block", "margin": "0 auto"}),
+            mo.image(src=str(ASSETS / "follow_line_camera.png"), style={"display": "block", "margin": "0 auto"}),
             mo.md("Sensor: front RGB camera").center(),
         ],
         align="center",
@@ -263,7 +265,7 @@ def _():
 
 @app.cell
 def _():
-    mo.image(src="control_arch.png").center()
+    mo.image(src=str(ASSETS / "control_arch.png")).center()
     return
 
 
@@ -348,7 +350,7 @@ def _():
 
 @app.cell
 def _():
-    mo.image(src="final_loop.png").center()
+    mo.image(src=str(ASSETS / "final_loop.png")).center()
     return
 
 
@@ -370,7 +372,7 @@ def _():
 
 @app.cell
 def _():
-    img_bgr = cv2.imread("image.png")
+    img_bgr = cv2.imread(str(ASSETS / "follow_line_camera.png"))
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
     img_h, img_w = img_bgr.shape[:2]
     return img_bgr, img_h, img_rgb, img_w
@@ -597,60 +599,19 @@ def _():
 
 @app.cell(hide_code=True)
 def _():
+    # Single source of truth: the same file students paste into Unibotics.
+    _code = (mo.notebook_dir().parent / "unibotics" / "follow_line_basic.py").read_text()
     mo.accordion(
         {
-            "💡 Solution: a complete, simple Follow Line": mo.md(r"""
-    ```python
-    import HAL
-    import WebGUI
-    import Frequency
-    import cv2
-    import numpy as np
-
-    # ---------------- Parameters: tune these! ----------------
-    V = 2.0                 # linear speed
-    KP = 1.0                # proportional gain
-    ROI = (0.75, 0.85)      # band of the image used (fractions of height)
-    LOWER_RED = np.array([0, 120, 70])
-    UPPER_RED = np.array([10, 255, 255])
-    # ----------------------------------------------------------
-
-    last_error = 0.0
-
-    while True:
-        Frequency.tick(50)
-
-        # SENSE
-        img = HAL.getImage()
-        h, w = img.shape[:2]
-
-        # PERCEIVE: where is the line?
-        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        mask = cv2.inRange(hsv, LOWER_RED, UPPER_RED)
-        top, bottom = int(ROI[0] * h), int(ROI[1] * h)
-        m = cv2.moments(mask[top:bottom, :])
-
-        if m["m00"] > 0:
-            cx = m["m10"] / m["m00"]
-            error = (cx - w / 2) / (w / 2)      # in [-1, 1]
-            last_error = error
-            cv2.circle(img, (int(cx), (top + bottom) // 2), 6, (0, 255, 0), -1)
-        else:
-            error = last_error                  # line lost: keep turning the same way
-
-        # CONTROL
-        HAL.setV(V)
-        HAL.setW(-KP * error)
-
-        # DEBUG
-        cv2.rectangle(img, (0, top), (w - 1, bottom), (255, 200, 0), 2)
-        cv2.line(img, (w // 2, 0), (w // 2, h), (255, 0, 0), 1)
-        WebGUI.showImage(img)
-    ```
-
+            "💡 Solution: a complete, simple Follow Line": mo.vstack(
+                [
+                    mo.md(f"```python\n{_code}```"),
+                    mo.md(r"""
     `last_error` is the only "memory" in this controller. It is a tiny trick
     to recover when the line goes out of view in a sharp curve.
-    """)
+    """),
+                ]
+            )
         }
     )
     return
