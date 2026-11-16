@@ -1,7 +1,6 @@
 """Follow Line, simple P controller (Session 1 solution).
 
-Paste this file into the Unibotics Follow Line editor and press Run.
-It is also shown inside notebooks/s1_follow_line.py (step 3.1).
+It is shown inside notebooks/s1_follow_line.py (step 3.1).
 """
 import HAL
 import WebGUI
@@ -26,7 +25,7 @@ while True:
     img = HAL.getImage()
     h, w = img.shape[:2]
 
-    # PERCEIVE
+    # THINK
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, LOWER_RED, UPPER_RED)
     top, bottom = int(ROI[0] * h), int(ROI[1] * h)
@@ -40,7 +39,7 @@ while True:
     else:
         error = last_error  # line lost: keep turning the same way
 
-    # CONTROL
+    # ACT
     HAL.setV(V)
     HAL.setW(-KP * error)
 

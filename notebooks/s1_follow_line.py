@@ -11,8 +11,12 @@
 
 import marimo
 
-__generated_with = "0.23.15"
-app = marimo.App(width="medium")
+__generated_with = "0.25.2"
+app = marimo.App(
+    width="medium",
+    layout_file="layouts/s1_follow_line.slides.json",
+    css_file="theme/slides-theme.css",
+)
 
 with app.setup:
     import marimo as mo
@@ -165,8 +169,9 @@ def _():
     ### A first reactive robot, step by step
 
     **Goal for today:** leave the room with a car that completes a lap of the
-    circuit on its own. It doesn't have to be fast. **Goal for next week:**
-    make it fast.
+    circuit on its own. It doesn't have to be fast.
+
+    **Goal for next week:** make it fast.
     """)
     return
 
@@ -184,10 +189,10 @@ def _():
 
     | Time | Block | You end up with |
     |---|---|---|
-    | 0:00 – 0:15 | Tour of Unibotics / RoboticsAcademy | The Follow Line exercise open and the simulator running |
+    | 0:00 – 0:15 | Tour of Unibotics | The Follow Line exercise open and the simulator running |
     | 0:15 – 0:20 | **Step 1**: move the robot | A car that drives forward... and crashes |
     | 0:20 – 0:45 | **Step 2**: see the line | A mask of the red line and its centre in the image |
-    | 0:45 – 1:10 | **Step 3**: close the loop (P controller) | **A first complete lap** 🎉 |
+    | 0:45 – 1:10 | **Step 3**: close the loop (P controller) | **A first complete lap** |
     | 1:10 – 1:20 | **Step 4**: speed vs. stability | An intuition of what limits your lap time |
     | 1:20 – 1:30 | Homework and wrap-up | A plan to make your car faster |
 
@@ -229,14 +234,18 @@ def _():
 def _():
     image1 = mo.vstack(
         [
-            mo.image(src=str(ASSETS / "robot_model.png"), style={"display": "block", "margin": "0 auto"}),
+            mo.image(src=str(ASSETS / "robot_model.png"),
+                     style={"display": "block", "margin": "0 auto"},
+                    height=450),
             mo.md("Actuators: linear speed **V** and angular speed **W**").center(),
         ],
         align="center",
     )
     image2 = mo.vstack(
         [
-            mo.image(src=str(ASSETS / "follow_line_camera.png"), style={"display": "block", "margin": "0 auto"}),
+            mo.image(src=str(ASSETS / "follow_line_camera.png"),
+                     style={"display": "block", "margin": "0 auto"},
+                    height=450),
             mo.md("Sensor: front RGB camera").center(),
         ],
         align="center",
@@ -265,7 +274,7 @@ def _():
 
 @app.cell
 def _():
-    mo.image(src=str(ASSETS / "control_arch.png")).center()
+    mo.image(src=str(ASSETS / "control_arch.png"),width=900).center()
     return
 
 
@@ -393,7 +402,7 @@ def _():
     hue_range = mo.ui.range_slider(start=0, stop=179, value=[0, 10], label="Hue")
     sat_range = mo.ui.range_slider(start=0, stop=255, value=[120, 255], label="Saturation")
     val_range = mo.ui.range_slider(start=0, stop=255, value=[70, 255], label="Value")
-    mo.vstack([hue_range, sat_range, val_range])
+    mo.vstack([hue_range, sat_range, val_range]).center()
     return hue_range, sat_range, val_range
 
 
@@ -427,9 +436,10 @@ def _():
 
 @app.cell
 def _():
-    roi_center = mo.ui.slider(0.50, 0.98, step=0.01, value=0.80, label="ROI position (fraction of image height)")
+    roi_center = mo.ui.slider(0.50, 0.98, step=0.01, value=0.80,
+                              label="ROI position (fraction of image height)")
     roi_height = mo.ui.slider(0.02, 0.30, step=0.01, value=0.10, label="ROI height")
-    mo.vstack([roi_center, roi_height])
+    mo.vstack([roi_center, roi_height]).center()
     return roi_center, roi_height
 
 
@@ -447,7 +457,7 @@ def _(img_bgr, img_h, img_w, lower_red, roi_center, roi_height, upper_red):
         _c = (int(line_cx), int(line_cy))
         cv2.line(_dbg, (img_w // 2, _c[1]), _c, (0, 255, 255), 4)
         cv2.circle(_dbg, _c, 12, (0, 255, 0), -1)
-    mo.image(cv2.cvtColor(_dbg, cv2.COLOR_BGR2RGB), width=600).center()
+    mo.image(cv2.cvtColor(_dbg, cv2.COLOR_BGR2RGB), width=500).center()
     return line_cx, roi_bottom, roi_top
 
 
@@ -460,7 +470,7 @@ def _(line_cx, roi_bottom, roi_top):
     """
         if line_cx is not None
         else "⚠️ **No red pixels in the ROI**: the line is lost! Your code must handle this case."
-    )
+    ).center()
     return
 
 
@@ -552,7 +562,7 @@ def _():
 @app.cell
 def _():
     kp_img_slider = mo.ui.slider(0, 5, step=0.1, value=1.0, label="Kp")
-    kp_img_slider
+    kp_img_slider.center()
     return (kp_img_slider,)
 
 
@@ -583,7 +593,13 @@ def _():
     mo.md(r"""
     For the frame above (from steps 2.1–2.2), these are the error and the command
     the car would send. Move the ROI in 2.2 and see how the error changes.
+    """)
+    return
 
+
+@app.cell(hide_code=True)
+def _():
+    mo.md(r"""
     ## 3.1 Your turn: first lap
 
     **Task:** combine step 2 and the control law. Start **slow** (`V = 1`) with a
@@ -650,9 +666,11 @@ def _():
 def _():
     sim_v = mo.ui.slider(1, 14, step=0.5, value=3, label="V (max speed) [m/s]", show_value=True)
     sim_kp = mo.ui.slider(0, 8, step=0.1, value=1.0, label="Kp", show_value=True)
-    sim_look = mo.ui.slider(0.5, 8, step=0.5, value=3, label="Lookahead [m]  (≈ ROI position)", show_value=True)
+    sim_look = mo.ui.slider(0.5, 8, step=0.5, value=3,
+                            label="Lookahead [m]  (≈ ROI position)", show_value=True)
     sim_kd = mo.ui.slider(0, 0.5, step=0.01, value=0.0, label="🚀 Kd", show_value=True)
-    sim_kv = mo.ui.slider(0, 40, step=1, value=0, label="🚀 Kv (slow down when error is large)", show_value=True)
+    sim_kv = mo.ui.slider(0, 40, step=1, value=0,
+                          label="🚀 Kv (slow down when error is large)", show_value=True)
     mo.hstack(
         [
             mo.vstack([mo.md("**Step 4 controls**"), sim_v, sim_kp, sim_look]),
