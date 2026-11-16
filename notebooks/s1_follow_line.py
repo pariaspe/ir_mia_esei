@@ -436,10 +436,12 @@ def _():
 
 @app.cell
 def _():
+    # Defined here but displayed next to the image in the cell below
+    # (a cell cannot read the value of a slider it creates itself).
     roi_center = mo.ui.slider(0.50, 0.98, step=0.01, value=0.80,
-                              label="ROI position (fraction of image height)")
-    roi_height = mo.ui.slider(0.02, 0.30, step=0.01, value=0.10, label="ROI height")
-    mo.vstack([roi_center, roi_height]).center()
+                              label="ROI position", show_value=True)
+    roi_height = mo.ui.slider(0.02, 0.30, step=0.01, value=0.10,
+                              label="ROI height", show_value=True)
     return roi_center, roi_height
 
 
@@ -457,7 +459,22 @@ def _(img_bgr, img_h, img_w, lower_red, roi_center, roi_height, upper_red):
         _c = (int(line_cx), int(line_cy))
         cv2.line(_dbg, (img_w // 2, _c[1]), _c, (0, 255, 255), 4)
         cv2.circle(_dbg, _c, 12, (0, 255, 0), -1)
-    mo.image(cv2.cvtColor(_dbg, cv2.COLOR_BGR2RGB), width=500).center()
+    mo.hstack(
+        [
+            mo.image(cv2.cvtColor(_dbg, cv2.COLOR_BGR2RGB), width=520),
+            mo.vstack(
+                [
+                    roi_center,
+                    roi_height,
+                    mo.md("Values are fractions of the image height (0 = top, 1 = bottom)."),
+                ],
+                gap=1,
+            ),
+        ],
+        justify="center",
+        align="center",
+        gap=2,
+    )
     return line_cx, roi_bottom, roi_top
 
 
