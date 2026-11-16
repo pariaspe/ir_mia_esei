@@ -15,9 +15,9 @@ The practice sessions use [Unibotics](https://unibotics.org), which runs [JdeRob
 ### Notebooks
 | Notebook | Content |
 |---|---|
+| `s1_follow_line.py` | Session 1: guided Follow Line, from the camera image to a P controller, plus a small 2D simulator for exploring speed vs. stability |
 <!-- | `00_cv_demo.py` | OpenCV basics: colour spaces, blur, threshold, colour segmentation |
 | `00_pid_demo.py` | Robot model, control loop, interactive P / PD / PID, visual servoing | -->
-| `s1_follow_line.py` | Session 1: guided Follow Line, from the camera image to a P controller, plus a small 2D simulator for exploring speed vs. stability |
 
 ## Running the notebooks
 ```bash

@@ -91,8 +91,8 @@ def main() -> None:
             vpage.write_text(re.sub(r"<title>[^<]*", title, vpage.read_text(), count=1))
             add_switch(page, f"{name}.vertical.html", "Notebook view")
             add_switch(vpage, f"{name}.html", "Slides view")
-            views = (f'<span class="views"><a href="{url}">Slides</a> · '
-                     f'<a href="notebooks/{name}.vertical.html">Notebook</a></span>')
+            views = (f'<span class="views"><a href="notebooks/{name}.vertical.html">Notebook</a> ·'
+                     f' <a href="{url}">Slides</a></span>')
         items.append(
             f'      <li><a href="{url}">{html.escape(title)}</a>{views}'
             f"<p>{html.escape(description)}</p></li>"
