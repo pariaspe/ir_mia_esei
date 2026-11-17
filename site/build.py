@@ -28,7 +28,7 @@ OUT = ROOT / "_site"
 # (file in notebooks/, title, description)
 NOTEBOOKS = [
     ("s1_follow_line.py", "Session 1: Follow Line",
-     "Guided Follow Line: from the camera image to a P controller, plus a small 2D simulator for exploring speed vs. stability."),
+     "Guided Follow Line exercise. Introduction to image processing from the camera sensor and to a P controller."),
     # ("00_cv_demo.py", "OpenCV basics",
     #  "Colour spaces, blur, threshold and colour segmentation."),
     # ("00_pid_demo.py", "PID control",
@@ -94,7 +94,7 @@ def main() -> None:
             views = (f'<span class="views"><a href="notebooks/{name}.vertical.html">Notebook</a> ·'
                      f' <a href="{url}">Slides</a></span>')
         items.append(
-            f'      <li><a href="{url}">{html.escape(title)}</a>{views}'
+            f'      <li><a href="{url}">{file}</a>{views}'
             f"<p>{html.escape(description)}</p></li>"
         )
 

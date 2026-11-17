@@ -1,8 +1,8 @@
-# Intelligent Robotics I: practice material (UVigo)
+# Intelligent Robotics I: practical material (UVigo)
 
-Practice material for *Intelligent Robotics I* (inter-university master's course UDC / USC / UVigo, 2026/27).
+Practical material for *Intelligent Robotics I* (inter-university master's course UDC / USC / UVigo, 2026/27).
 The notebooks are published as a website on GitHub Pages; they run in the browser, with no install.
-The practice sessions use [Unibotics](https://unibotics.org), which runs [JdeRobot RoboticsAcademy](https://jderobot.github.io/RoboticsAcademy/).
+The practical sessions use [Unibotics](https://unibotics.org), which runs [JdeRobot RoboticsAcademy](https://jderobot.github.io/RoboticsAcademy/).
 
 ## Contents
 | Folder | What it holds |

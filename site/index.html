@@ -45,45 +45,101 @@
     ul.notebooks .views a { font-weight: 400; }
     ul.notebooks p { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
     .note { color: var(--muted); font-size: 0.9rem; }
+    .about { display: grid; gap: 16px; }
+    .about p { margin: 0; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .links a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 14px; border: 1px solid var(--border); border-radius: 999px;
+      background: var(--card); color: var(--text); text-decoration: none; font-size: 0.95rem;
+      transition: border-color .15s, transform .15s;
+    }
+    .links a:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .links svg { width: 18px; height: 18px; flex: none; }
+    .contact { display: flex; flex-wrap: wrap; gap: 8px 24px; color: var(--muted); font-size: 0.95rem; }
+    .contact span { display: inline-flex; align-items: center; gap: 8px; }
+    .contact svg { width: 16px; height: 16px; flex: none; }
+    .contact a { color: var(--text); }
+    .callout {
+      border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 8px;
+      background: var(--card); padding: 14px 18px;
+    }
+    .callout strong { color: var(--accent); }
     footer { color: var(--muted); font-size: 0.85rem; margin-top: 56px; }
   </style>
 </head>
 <body>
 <main>
   <h1>Intelligent Robotics I</h1>
-  <p class="subtitle">Practice sessions · Master's in Artificial Intelligence (UDC · USC · UVigo) · 2026/27</p>
+  <p class="subtitle">Practical sessions · Master's in Artificial Intelligence (UVigo) · 2026/27</p>
 
   <h2>About the course</h2>
   <p>
-    The practice part of the course is 10 hours over four sessions on
+    The practical part of the course is 10 hours over four sessions on
     <a href="https://unibotics.org">Unibotics</a>, which runs
     <a href="https://jderobot.github.io/RoboticsAcademy/">JdeRobot RoboticsAcademy</a>
-    (Gazebo + ROS 2, with Python written in the browser).
-    Session 1 starts with a purely reactive problem, Follow Line.
-    In sessions 2-4, pairs design and build a hybrid or deliberative architecture for a more complex exercise.
+    (Gazebo + ROS 2, with Python written in the browser). Installation steps can be found at
+    <a href="https://unibotics.org/installation/">Unibotics user guide</a>.
+    The platform works in Windows, Linux and MacOS via docker, and it is recommended to use 
+    a recent version of Firefox or Chrome.
   </p>
   <table>
     <tr><th>Session</th><th>Date</th><th>Content</th></tr>
-    <tr><td>S1</td><td>26/11</td><td>Introduction to the platform: a reactive Follow Line (individual)</td></tr>
-    <tr><td>S2</td><td>03/12</td><td>Choose an exercise and design a hybrid or deliberative architecture (pairs)</td></tr>
-    <tr><td>S3</td><td>10/12</td><td>Implementation (pairs)</td></tr>
+    <tr><td>S1</td><td>26/11</td><td>Introduction to the platform: a reactive Follow Line problem (individual)</td></tr>
+    <tr><td>S2</td><td>03/12</td><td>Choose an exercise and initial design of a hybrid/deliberative architecture (pairs)</td></tr>
+    <tr><td>S3</td><td>10/12</td><td>Architectural proposal and implementation (pairs)</td></tr>
     <tr><td>S4</td><td>17/12</td><td>Implementation and demos (pairs)</td></tr>
   </table>
 
   <h2>Notebooks</h2>
   <ul class="notebooks">
-<!-- NOTEBOOKS -->
+  <!-- NOTEBOOKS -->
   </ul>
   <p class="note">
     The notebooks run entirely in your browser, so the first load takes a little while.
   </p>
 
   <h2>About me</h2>
-  <!-- TODO: write a short bio and add your links (web page, email, Google Scholar…). -->
-  <p>
-    Pedro Arias (Universidade de Vigo) ... TODO
-    <a href="https://github.com/pariaspe">GitHub</a>
-  </p>
+  <div class="about">
+    <p>
+      I obtained a PhD in Automation Control and Robotics by Universidad Politécnica
+      de Madrid in 2025. My research interests include navigation and planning for multi-agent
+      systems.
+    </p>
+
+    <div class="links">
+      <a href="https://github.com/pariaspe">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>
+        GitHub
+      </a>
+      <a href="https://scholar.google.com/citations?user=2TzzNTEAAAAJ">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285f4" d="M12 2 1 9l11 7 9-5.7V17h2V9z"/><path fill="#356ac3" d="M5.5 13.2V17c0 1.9 2.9 3.5 6.5 3.5s6.5-1.6 6.5-3.5v-3.8L12 17.3z"/></svg>
+        Google Scholar
+      </a>
+      <a href="https://orcid.org/0000-0001-7166-9367">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#a6ce39"/><text x="12" y="16.3" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#fff">iD</text></svg>
+        ORCID
+      </a>
+    </div>
+
+    <div class="contact">
+      <span>
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <a href="mailto:pedro.arias.perez@uvigo.gal">pedro.arias.perez@uvigo.gal</a>
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17"/><path d="M2 21h20"/><path d="M16 7h3a1 1 0 0 1 1 1v13"/><circle cx="12.5" cy="12.5" r=".8" fill="currentColor"/></svg>
+        Office 311
+      </span>
+    </div>
+
+    <div class="callout">
+      <strong>Looking for a master's thesis?</strong>
+      If you are interested in IA-applied robotics,
+      I am happy to supervise master's theses on these topics.
+      Send me an email or drop by my office.
+    </div>
+  </div>
 
   <footer>Universidade de Vigo · Intelligent Robotics I</footer>
 </main>
