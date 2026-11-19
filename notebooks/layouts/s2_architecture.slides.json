@@ -26,11 +26,6 @@
       {},
       {},
       {},
-      {
-        "type": "fragment"
-      },
-      {},
-      {},
       {},
       {},
       {
@@ -43,12 +38,23 @@
       {
         "type": "fragment"
       },
-      {},
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
       {},
       {},
       {
-        "speakerNotes": "You will get feedback on your proposal at the start of Session 3. It is much cheaper to fix a design on paper than after two sessions of coding."
-      }
+        "type": "fragment"
+      },
+      {},
+      {
+        "type": "slide"
+      },
+      {},
+      {}
     ],
     "deck": {}
   }

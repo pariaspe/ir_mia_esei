@@ -400,10 +400,43 @@ def _(agent, surprise):
     known, real, start, goal = make_world(surprise.value)
     _run = {"Reactive": run_reactive, "Deliberative": run_deliberative, "Hybrid": run_hybrid}
     world_log, world_status = _run[agent.value](known, real, start, goal)
-    tick = mo.ui.slider(
-        0, len(world_log) - 1, value=len(world_log) - 1, label="Tick", show_value=True
+    # The tick lives in a state so the slider and the buttons stay in sync.
+    get_tick, set_tick = mo.state(len(world_log) - 1)
+    return (
+        get_tick,
+        goal,
+        known,
+        real,
+        set_tick,
+        start,
+        world_log,
+        world_status,
     )
-    return goal, known, real, start, tick, world_log, world_status
+
+
+@app.cell
+def _(set_tick, world_log):
+    # The buttons must live in a different cell from the slider: marimo does not
+    # rerun the cell whose element changed the state, and the slider cell must
+    # rerun to move the slider.
+    _last = len(world_log) - 1
+    prev_tick = mo.ui.button(
+        label="◀ Previous tick", on_click=lambda _: set_tick(lambda k: max(k - 1, 0))
+    )
+    next_tick = mo.ui.button(
+        label="Next tick ▶", on_click=lambda _: set_tick(lambda k: min(k + 1, _last))
+    )
+    return next_tick, prev_tick
+
+
+@app.cell
+def _(get_tick, set_tick, world_log):
+    _last = len(world_log) - 1
+    tick = mo.ui.slider(
+        0, _last, value=min(get_tick(), _last), label="Tick", show_value=True,
+        on_change=set_tick,
+    )
+    return (tick,)
 
 
 @app.cell
@@ -411,6 +444,8 @@ def dummy_comparison(
     agent,
     goal,
     known,
+    next_tick,
+    prev_tick,
     real,
     start,
     surprise,
@@ -436,7 +471,7 @@ def dummy_comparison(
     mo.hstack(
         [
             plot_world(known, real, start, goal, world_log, tick.value),
-            mo.vstack([agent, surprise, tick, _banner], gap=1.5),
+            mo.vstack([agent, surprise, tick, mo.hstack([prev_tick, next_tick], justify="start"), _banner], gap=1.5),
         ],
         justify="center", align="center", gap=2, widths=[3, 2],
     )
