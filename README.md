@@ -17,6 +17,8 @@ The practical sessions use [Unibotics](https://unibotics.org), which runs [JdeRo
 |---|---|
 | `s1_follow_line.py` | Session 1: guided Follow Line, from the camera image to a P controller, plus a small 2D simulator for exploring speed vs. stability |
 | `s2_architecture.py` | Session 2: reactive vs. deliberative vs. hybrid architectures on a toy grid world, finite state machines and the FSM template, and how to write the architecture proposal |
+| `s3_implementation.py` | Session 3: building and debugging the robot state by state, experiments on a toy corridor (why one run is not enough), the final delivery (report template, video, must/should/could) and the schedule of the 1:1 meetings |
+| `s4_demos.py` | Session 4: format and schedule of the live demos (~15 min per pair), what to do while waiting, and the final delivery checklist |
 <!-- | `00_cv_demo.py` | OpenCV basics: colour spaces, blur, threshold, colour segmentation |
 | `00_pid_demo.py` | Robot model, control loop, interactive P / PD / PID, visual servoing | -->
 
