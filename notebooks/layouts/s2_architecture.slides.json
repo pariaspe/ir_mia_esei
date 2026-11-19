@@ -1,0 +1,55 @@
+{
+  "type": "slides",
+  "data": {
+    "cells": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        "speakerNotes": "Write on the whiteboard best lap time from each student and the top 3 exercises selected by each student pair. Do the assignment, trying to allocate them evenly."
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        "type": "fragment"
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        "type": "fragment"
+      },
+      {},
+      {},
+      {},
+      {},
+      {
+        "type": "fragment"
+      },
+      {},
+      {},
+      {},
+      {},
+      {
+        "type": "fragment"
+      },
+      {},
+      {},
+      {},
+      {
+        "speakerNotes": "You will get feedback on your proposal at the start of Session 3. It is much cheaper to fix a design on paper than after two sessions of coding."
+      }
+    ],
+    "deck": {}
+  }
+}

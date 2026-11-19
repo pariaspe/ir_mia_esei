@@ -29,6 +29,8 @@ OUT = ROOT / "_site"
 NOTEBOOKS = [
     ("s1_follow_line.py", "Session 1: Follow Line",
      "Guided Follow Line exercise. Introduction to image processing from the camera sensor and to a P controller."),
+    ("s2_architecture.py", "Session 2: Robot architectures",
+     "Reactive, deliberative and hybrid architectures compared on a toy problem, finite state machines and the FSM template, and how to write the architecture proposal."),
     # ("00_cv_demo.py", "OpenCV basics",
     #  "Colour spaces, blur, threshold and colour segmentation."),
     # ("00_pid_demo.py", "PID control",
