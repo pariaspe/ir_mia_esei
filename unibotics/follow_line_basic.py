@@ -8,7 +8,7 @@ import Frequency
 import cv2
 import numpy as np
 
-# ---------------- Parameters: tune these! ----------------
+# ---------------- Parameters to tune ----------------------
 V = 2.0                 # linear speed
 KP = 1.0                # proportional gain
 ROI = (0.75, 0.85)      # band of the image used (fractions of height)

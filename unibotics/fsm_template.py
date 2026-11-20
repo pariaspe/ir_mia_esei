@@ -19,17 +19,17 @@ import time
 import Frequency
 import HAL
 
-# ---------------- Parameters: tune these ----------------
+# ---------------- Parameters to tune ---------------------
 LOOP_HZ = 20          # iterations per second of the main loop
 FORWARD_V = 0.3       # linear speed when moving forward
 TURN_W = 0.5          # angular speed when turning
 TURN_TIME = 2.0       # seconds spent turning
 # ---------------------------------------------------------
 
-# ---------------- World model: what the robot remembers ----------------
+# ---------------------- World model ----------------------
 memory = {
     "state_start": time.time(),  # when the current state was entered
-    # Add what your architecture needs, for example:
+    # Add your architecture needs, what the robot needs to remember, for example:
     # "visited": set(), "path": [], "targets_found": [], "laps": 0,
 }
 
@@ -55,7 +55,7 @@ def obstacle_ahead(sensors):
     return False
 
 
-# ---------------- States: one function per state ----------------
+# ---------------- States (one function per state) ----------------
 def forward(sensors):
     HAL.setV(FORWARD_V)
     HAL.setW(0.0)
@@ -85,7 +85,7 @@ STATES = {
 }
 state = "FORWARD"  # initial state
 
-# ---------------- Main loop: you should not need to change it ----------------
+# ---------------- Main loop (you should not need to change it) ----------------
 print("Starting in", state)
 while True:
     Frequency.tick(LOOP_HZ)
