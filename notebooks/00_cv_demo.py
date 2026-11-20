@@ -11,7 +11,11 @@
 import marimo
 
 __generated_with = "0.23.15"
-app = marimo.App(width="medium")
+app = marimo.App(
+    width="medium",
+    layout_file="layouts/00_cv_demo.slides.json",
+    css_file="theme/slides-theme.css"
+)
 
 with app.setup:
     import marimo as mo

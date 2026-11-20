@@ -12,7 +12,11 @@
 import marimo
 
 __generated_with = "0.25.2"
-app = marimo.App(width="medium")
+app = marimo.App(
+    width="medium",
+    layout_file="layouts/00_pid_demo.slides.json",
+    css_file="theme/slides-theme.css"
+)
 
 with app.setup:
     import marimo as mo
@@ -126,12 +130,14 @@ def _():
 def _():
 
     image1 = mo.vstack([
-        mo.image(src=str(ASSETS / "robot_model.png"), style={"display": "block", "margin": "0 auto"}),
+        mo.image(src=str(ASSETS / "robot_model.png"),
+                 style={"display": "block", "margin": "0 auto"}),
         mo.md("Robot Actuators: Holonomic car").center()
     ], align="center")
 
     image2 = mo.vstack([
-        mo.image(src=str(ASSETS / "follow_line_camera.png"), style={"display": "block", "margin": "0 auto"}),
+        mo.image(src=str(ASSETS / "follow_line_camera.png"),
+                 style={"display": "block", "margin": "0 auto"}),
         mo.md("Robot Sensors: RGB camera").center()
     ], align="center")
 
